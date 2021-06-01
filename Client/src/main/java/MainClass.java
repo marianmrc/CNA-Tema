@@ -1,11 +1,13 @@
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-
-import javax.swing.text.html.ListView;
-import java.awt.*;
 
 public class MainClass extends Application {
     private final ObservableList<String> messages = FXCollections.observableArrayList();
