@@ -66,6 +66,7 @@ public class MainClass extends Application {
                         messagesView.scrollTo(messages.size());
                     }
                 });
+
             }
 
             @Override
@@ -86,5 +87,7 @@ public class MainClass extends Application {
                 System.out.println("Disconnected");
             }
         });
+
+        chat.onNext(ChatServiceOuterClass.ChatMessage.newBuilder().setFrom(name.getText()).setMessage("new user connected").build());
     }
 }
