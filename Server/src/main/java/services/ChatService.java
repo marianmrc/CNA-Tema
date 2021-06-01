@@ -18,7 +18,15 @@ public class ChatService extends ChatServiceGrpc.ChatServiceImplBase {
         return new StreamObserver<ChatServiceOuterClass.ChatMessage>() {
             @Override
             public void onNext(ChatServiceOuterClass.ChatMessage value) {
+                System.out.println(value);
+                ChatServiceOuterClass.ChatMessageFromServer message = ChatServiceOuterClass.ChatMessageFromServer.newBuilder()
+                        .setMessage(value)
+                        .setTimestamp(Timestamp.newBuilder().setSeconds(System.currentTimeMillis() / 1000))
+                        .build();
 
+                for (StreamObserver<ChatServiceOuterClass.ChatMessageFromServer> observer : observers) {
+                    observer.onNext(message);
+                }
             }
 
             @Override
