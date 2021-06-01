@@ -1,7 +1,18 @@
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
+import javax.swing.text.html.ListView;
+import java.awt.*;
+
 public class MainClass extends Application {
+    private final ObservableList<String> messages = FXCollections.observableArrayList();
+    private final ListView<String> messagesView = new ListView<>();
+    private final TextField name = new TextField("name");
+    private final TextField message = new TextField();
+    private final Button send = new Button();
 
     public static void main(String[] args) {
 
@@ -9,6 +20,13 @@ public class MainClass extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        
+        messagesView.setItems(messages);
+
+        send.setText("Send");
+
+        BorderPane pane = new BorderPane();
+        pane.setLeft(name);
+        pane.setCenter(message);
+        pane.setRight(send);
     }
 }
