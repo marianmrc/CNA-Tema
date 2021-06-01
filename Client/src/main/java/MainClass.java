@@ -24,7 +24,7 @@ public class MainClass extends Application {
     private final ListView<String> loggersView = new ListView<>();
 
     public static void main(String[] args) {
-
+        launch(args);
     }
 
     @Override
