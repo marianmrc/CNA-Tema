@@ -70,7 +70,14 @@ public class MainClass extends Application {
 
             @Override
             public void onError(Throwable t) {
-
+                if (value.getMessage().getMessage().equals("disconnected") || value.getMessage().getMessage().equals("new user connected")) {
+                    loggers.add(value.getMessage().getFrom() + " " + value.getMessage().getMessage());
+                    loggersView.scrollTo(loggers.size());
+                }
+                else {
+                    messages.add(value.getMessage().getFrom() + ": " + value.getMessage().getMessage());
+                    messagesView.scrollTo(messages.size());
+                }
             }
 
             @Override
