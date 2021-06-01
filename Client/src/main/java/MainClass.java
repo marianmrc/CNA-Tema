@@ -1,3 +1,6 @@
+import io.grpc.ManagedChannel;
+import io.grpc.ManagedChannelBuilder;
+import io.grpc.stub.StreamObserver;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -8,6 +11,8 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import protobuf.ChatServiceGrpc;
+import protobuf.ChatServiceOuterClass;
 
 public class MainClass extends Application {
     private final ObservableList<String> messages = FXCollections.observableArrayList();
@@ -44,5 +49,27 @@ public class MainClass extends Application {
         primaryStage.setScene(new Scene(root, 720, 600));
 
         primaryStage.show();
+
+        ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 9090).usePlaintext().build();
+        ChatServiceGrpc.ChatServiceStub chatService = ChatServiceGrpc.newStub(channel);
+
+        StreamObserver<ChatServiceOuterClass.ChatMessage> chat = chatService.chat(new StreamObserver<ChatServiceOuterClass.ChatMessageFromServer>() {
+            @Override
+            public void onNext(ChatServiceOuterClass.ChatMessageFromServer value) {
+                Platform.runLater(() -> {
+
+                });
+            }
+
+            @Override
+            public void onError(Throwable t) {
+
+            }
+
+            @Override
+            public void onCompleted() {
+
+            }
+        });
     }
 }
