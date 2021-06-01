@@ -13,6 +13,8 @@ public class MainClass extends Application {
     private final TextField name = new TextField("name");
     private final TextField message = new TextField();
     private final Button send = new Button();
+    private final ObservableList<String> loggers = FXCollections.observableArrayList();
+    private final ListView<String> loggersView = new ListView<>();
 
     public static void main(String[] args) {
 
@@ -28,5 +30,17 @@ public class MainClass extends Application {
         pane.setLeft(name);
         pane.setCenter(message);
         pane.setRight(send);
+
+        loggersView.setItems(loggers);
+
+        BorderPane root = new BorderPane();
+        root.setCenter(messagesView);
+        root.setBottom(pane);
+        root.setLeft(loggersView);
+
+        primaryStage.setTitle("gRPC Chat");
+        primaryStage.setScene(new Scene(root, 720, 600));
+
+        primaryStage.show();
     }
 }
