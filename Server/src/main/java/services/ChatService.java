@@ -35,7 +35,7 @@ public class ChatService extends ChatServiceGrpc.ChatServiceImplBase {
 
             @Override
             public void onCompleted() {
-
+                observers.remove(responseObserver);
             }
         };
     }
